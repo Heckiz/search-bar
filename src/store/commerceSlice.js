@@ -3,7 +3,6 @@ import { API_BASE_URL } from './config';
 import axios from 'axios';
 
 export const getDataCommerces = createAsyncThunk('commerces/getData', async (_, { dispatch }) => {
-
     const data = await axios.get(`${API_BASE_URL}/`);
     dispatch(setCommerces(data.data));
 }
@@ -23,5 +22,7 @@ const commercesSlice = createSlice({
 })
 
 export const { setCommerces } = commercesSlice.actions
+
+export const selectAllCommerces = commercesAdapter.getSelectors((state)=>state.commerces)
 
 export default commercesSlice.reducer

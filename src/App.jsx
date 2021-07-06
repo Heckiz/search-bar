@@ -13,8 +13,7 @@ function App() {
 
       <Box
         h="max-content"
-        border="2px solid red"
-      >
+        >
 
         <SearchBar />
         <CommercesList />

@@ -1,25 +1,48 @@
-import { Box, Center, Grid, GridItem } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getDataCommerces } from '../../store/commerceSlice'
+import { Box } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDataCommerces, selectAllCommerces } from '../../store/commerceSlice'
 import CommerceCard from './CommerceCard';
 
 export default function CommercesList() {
+    const dispach = useDispatch();
 
-    const dispach = useDispatch()
     useEffect(() => {
         dispach(getDataCommerces())
     }, [dispach])
 
+    const data = useSelector(selectAllCommerces.selectAll);
+
+    const commerceHeader =  {
+        "id": "ID",
+        "commerce": "Commerce",
+        "cuit": "CUIT",
+        "concept_1": "Concept 1",
+        "concept_2": "Concept 2",
+        "concept_3": "Concept 3",
+        "concept_4": "Concept 4",
+        "concept_5": "Concept 5",
+        "concept_6": "Concept 6",
+        "balance": "Balance",
+        "active": "Active",
+        "lastSale": "Last Sale"
+      }
     return (
         <Box h="80vh"
-            border="2px solid green"
+        d="grid" 
         >
-            <Box border="2px solid orange" d="flex" justifyContent="center">
             
-            <CommerceCard />
+            <CommerceCard commerce={commerceHeader} />
 
-            </Box>
+            {
+                data.map((commerce) => (
+
+                    <Box key={commerce.id} >
+                        <CommerceCard commerce={commerce} />
+                    </Box>
+                ))
+            }
+
         </Box>
     )
 }

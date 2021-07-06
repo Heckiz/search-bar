@@ -1,58 +1,60 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
-export default function CommerceCard() {
+export default function CommerceCard({ commerce }) {
     const blockStyle = {
         d: 'flex',
         textAlign: 'center',
-        boxShadow:'lg',
+        boxShadow: 'lg',
         border: '2px solid black',
-        width:'140px',
-        marginY:'20px'
+        marginY: '20px',
+        width: '40%',
+
 
     };
     return (
         <Box
-            maxW="80%" borderWidth="1px" borderRadius="lg"
-            borderRadius="lg" 
+            maxW="90%" borderWidth="1px" borderRadius="lg"
+            borderRadius="lg"
             boxShadow="lg"
         >
             <Flex color="dark" >
                 <Box style={blockStyle}>
-                    id
+                    {commerce.id}
                 </Box>
                 <Box style={blockStyle}>
-                    commerce
+                    {commerce.commerce}
                 </Box >
                 <Box style={blockStyle}>
-                    cuit
+                    {commerce.cuit}
                 </Box>
                 <Box style={blockStyle}>
-                    concept_1
+                    {commerce.concept_1}
                 </Box>
                 <Box style={blockStyle}>
-                    concept_2
+                    {commerce.concept_2}
                 </Box>
                 <Box style={blockStyle}>
-                    concept_3
+                    {commerce.concept_3}
                 </Box>
                 <Box style={blockStyle}>
-                    concept_4
+                    {commerce.concept_4}
                 </Box>
                 <Box style={blockStyle}>
-                    concept_5
+                    {commerce.concept_5}
                 </Box>
                 <Box style={blockStyle}>
-                    concept_6
+                    {commerce.concept_6}
                 </Box>
                 <Box style={blockStyle}>
-                    balance
+                    {commerce.balance}
+                </Box>
+                <Box style={blockStyle} bg={commerce.active ? 'green.200' : 'red.200'}  >
+                    {commerce.active ? <Text>ACTIVO</Text> : <Text>INACTIVO</Text>}
                 </Box>
                 <Box style={blockStyle}>
-                    active
-                </Box>
-                <Box style={blockStyle}>
-                    lastSale
+
+                    {commerce.lastSale}
                 </Box>
             </Flex>
         </Box>
