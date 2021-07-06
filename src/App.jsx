@@ -12,9 +12,8 @@ function App() {
     <Provider store={store}>
 
       <Box
-        d="grid" h="100vh"
-        justifyContent="center"
-        border="2px solid black"
+        h="max-content"
+        border="2px solid red"
       >
 
         <SearchBar />
