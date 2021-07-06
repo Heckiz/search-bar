@@ -1,15 +1,10 @@
 import { Box } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDataCommerces, selectAllCommerces } from '../../store/commerceSlice'
+import React from 'react';
+import {  useSelector } from 'react-redux';
+import { selectAllCommerces } from '../../store/commerceSlice'
 import CommerceCard from './CommerceCard';
 
 export default function CommercesList() {
-    const dispach = useDispatch();
-
-    useEffect(() => {
-        dispach(getDataCommerces())
-    }, [dispach])
 
     const data = useSelector(selectAllCommerces.selectAll);
 

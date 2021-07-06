@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getDataCommerces } from '../store/commerceSlice'
+import { useDispatch } from 'react-redux'
 import { Box, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
 import { SearchIcon } from "@chakra-ui/icons"
 
 export default function SearchBar() {
+
+    const [search, setSearch] = useState("")
+
+    const dispach = useDispatch();
+
+    useEffect(() => {
+        dispach(getDataCommerces({search:search}))
+    }, [search])
+
+
+    const handleChange = (event) => {
+        setSearch(event.target.value)
+    };
+
     return (
         <Box
             h="20vh" d="flex"
@@ -17,6 +33,7 @@ export default function SearchBar() {
                 <Input
                     pr="20"
                     placeholder="Search Commerce"
+                    onChange={handleChange}
                 />
 
                 <InputRightElement pr="3">
