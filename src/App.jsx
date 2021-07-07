@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react'
 import './App.css';
 import { Box } from '@chakra-ui/react'
-import { Provider } from 'react-redux';
-import store from './store/store';
 import SearchBar from './components/SearchBar';
 import CommercesList from './components/Table/CommercesList';
+import { getCommerces } from './store/helpers';
 
 function App() {
 
+  const [search, setSearch] = useState("")
+  const [orderCommerce, setOrderCommerce] = useState(null);
+
+  const handleOrder = ()=>{
+      orderCommerce == null ? setOrderCommerce("acs") :
+      orderCommerce == "acs" ? setOrderCommerce("desc") :
+      setOrderCommerce(null)
+  }
+  const handleChange = (event) => {
+      setSearch(event.target.value)
+  };
+
+  getCommerces({search, orderCommerce})
   return (
-    <Provider store={store}>
 
       <Box
         h="max-content"
         >
 
-        <SearchBar />
-        <CommercesList />
+        <SearchBar handleChange={handleChange}/>
+        <CommercesList handleOrder={handleOrder}/>
 
       </Box>
 
-    </Provider>
   )
 }
 

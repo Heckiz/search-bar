@@ -1,24 +1,23 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
+export const blockStyle = {
+    d: 'flex',
+    textAlign: 'center',
+    boxShadow: 'lg',
+    border: '2px solid black',
+    marginY: '20px',
+    width: '50%',
+    overflow: 'hidden',
+    cursor: 'pointer'
+
+
+};
 export default function CommerceCard({ commerce }) {
-    const blockStyle = {
-        d: 'flex',
-        textAlign: 'center',
-        boxShadow: 'lg',
-        border: '2px solid black',
-        marginY: '20px',
-        width: '40%',
 
-
-    };
     return (
-        <Box
-            maxW="90%" borderWidth="1px" borderRadius="lg"
-            borderRadius="lg"
-            boxShadow="lg"
-        >
-            <Flex color="dark" >
+        <Box>
+            <Flex  >
                 <Box style={blockStyle}>
                     {commerce.id}
                 </Box>
