@@ -5,7 +5,7 @@ import { selectAllCommerces } from '../../store/commerceSlice'
 import CommerceCard from './CommerceCard';
 import TableHeader from './TableHeader';
 
-export default function CommercesList({handleOrder}) {
+export default function CommercesList({handleOrderByCommerce, handleOrderByCuit}) {
 
     const data = useSelector(selectAllCommerces.selectAll);
 
@@ -13,7 +13,9 @@ export default function CommercesList({handleOrder}) {
     return (
         <Box d="grid" 
         >
-            <TableHeader handleOrder={handleOrder}/>
+            <TableHeader 
+            handleOrderByCommerce={handleOrderByCommerce} 
+            handleOrderByCuit={handleOrderByCuit}/>
             {
                 data.map((commerce) => (
 
