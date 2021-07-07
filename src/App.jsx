@@ -10,23 +10,31 @@ function App() {
   const [search, setSearch] = useState("")
   const [orderCommerce, setOrderCommerce] = useState(null);
   const [orderCuit, setOrderCuit] = useState(null);
+  const [state, setState] = useState(null);
+
 
 
   const handleOrderByCommerce = ()=>{
-      orderCommerce == null ? setOrderCommerce("acs") :
+      orderCommerce == null ? setOrderCommerce("acs")&setOrderCuit(null) :
       orderCommerce == "acs" ? setOrderCommerce("desc") :
       setOrderCommerce(null)
   }
   const handleOrderByCuit = ()=>{
-    orderCuit == null ? setOrderCuit("acs") :
+    orderCuit == null ? setOrderCuit("acs")&setOrderCommerce(null):
     orderCuit == "acs" ? setOrderCuit("desc") :
     setOrderCuit(null)
+  }
+
+  const handleShowState = ()=>{
+    state == null ? setState(true):
+    state == true ? setState(false) :
+    setState(null)
   }
   const handleChange = (event) => {
       setSearch(event.target.value)
   };
 
-  getCommerces({search, orderCommerce, orderCuit})
+  getCommerces({search, orderCommerce, orderCuit,state})
   return (
 
       <Box
@@ -36,7 +44,8 @@ function App() {
         <SearchBar handleChange={handleChange}/>
         <CommercesList 
         handleOrderByCommerce={handleOrderByCommerce}  
-        handleOrderByCuit={handleOrderByCuit}/>
+        handleOrderByCuit={handleOrderByCuit}
+        handleShowState={handleShowState}/>
 
       </Box>
 

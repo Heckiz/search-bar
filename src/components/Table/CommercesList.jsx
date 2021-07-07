@@ -5,7 +5,7 @@ import { selectAllCommerces } from '../../store/commerceSlice'
 import CommerceCard from './CommerceCard';
 import TableHeader from './TableHeader';
 
-export default function CommercesList({handleOrderByCommerce, handleOrderByCuit}) {
+export default function CommercesList({handleOrderByCommerce, handleOrderByCuit, handleShowState}) {
 
     const data = useSelector(selectAllCommerces.selectAll);
 
@@ -15,7 +15,8 @@ export default function CommercesList({handleOrderByCommerce, handleOrderByCuit}
         >
             <TableHeader 
             handleOrderByCommerce={handleOrderByCommerce} 
-            handleOrderByCuit={handleOrderByCuit}/>
+            handleOrderByCuit={handleOrderByCuit}
+            handleShowState={handleShowState}/>
             {
                 data.map((commerce) => (
 
