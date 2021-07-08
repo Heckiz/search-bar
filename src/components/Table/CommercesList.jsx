@@ -1,21 +1,34 @@
 import { Box, Button } from '@chakra-ui/react';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectAllCommerces } from '../../store/commerceSlice'
+import React , { useState }from 'react';
+
 import CommerceCard from './CommerceCard';
 import TableHeader from './TableHeader';
+import api from '../../store/commerceAPISlice'
 
-export default function CommercesList({
-    handleOrderByCommerce,
-    handleOrderByCuit,
-    handleShowState,
-    orderCommerce,
-    orderCuit,
-    stateActive,
-    handleNextPage
-}) {
-    const data = useSelector(selectAllCommerces);
-    console.log(data)
+export default function CommercesList({search}) {
+
+    const [orderCommerce, setOrderCommerce] = useState(null);
+    const [orderCuit, setOrderCuit] = useState(null);
+    const [stateActive, setStateActive] = useState(null);
+
+    const handleOrderByCommerce = () => {
+      orderCommerce == null ? setOrderCommerce("acs") & setOrderCuit(null) :
+        orderCommerce == "acs" ? setOrderCommerce("desc") :
+          setOrderCommerce(null)
+    };
+    const handleOrderByCuit = () => {
+      orderCuit == null ? setOrderCuit("acs") & setOrderCommerce(null) :
+        orderCuit == "acs" ? setOrderCuit("desc") :
+          setOrderCuit(null)
+    };
+    const handleShowState = () => {
+      stateActive == null ? setStateActive(true) :
+        stateActive == true ? setStateActive(false) :
+          setStateActive(null)
+    };
+
+  const data = api.useGetCommerceDataQuery({search, orderCommerce, orderCuit, stateActive})
+  console.log(data)
     return (
         <Box d="grid"
         >
@@ -29,14 +42,14 @@ export default function CommercesList({
                 handleShowState={handleShowState}
                 stateActive={stateActive}
             />
-            {
-                data.data.map((commerce) => (
+             {/* {
+                data.map((commerce) => (
 
                     <Box key={commerce.id} >
                         <CommerceCard commerce={commerce} />
                     </Box>
                 ))
-            }
+            } */}
             <Button onClick={() => handleNextPage(data.page)}>
                 next
             </Button>
