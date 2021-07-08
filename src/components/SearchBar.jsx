@@ -3,7 +3,7 @@ import {getCommerces} from '../store/helpers'
 import { Box, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
 import { SearchIcon } from "@chakra-ui/icons"
 
-export default function SearchBar({handleChange}) {
+export default function SearchBar({handleSearch}) {
 
     return (
         <Box
@@ -19,7 +19,7 @@ export default function SearchBar({handleChange}) {
                 <Input
                     pr="20"
                     placeholder="Search Commerce"
-                    onChange={handleChange}
+                    onChange={handleSearch}
                 />
 
                 <InputRightElement pr="3">

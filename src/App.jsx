@@ -10,44 +10,47 @@ function App() {
   const [search, setSearch] = useState("")
   const [orderCommerce, setOrderCommerce] = useState(null);
   const [orderCuit, setOrderCuit] = useState(null);
-  const [state, setState] = useState(null);
+  const [stateActive, setStateActive] = useState(null);
 
-
-
-  const handleOrderByCommerce = ()=>{
-      orderCommerce == null ? setOrderCommerce("acs")&setOrderCuit(null) :
+  const handleOrderByCommerce = () => {
+    orderCommerce == null ? setOrderCommerce("acs") & setOrderCuit(null) :
       orderCommerce == "acs" ? setOrderCommerce("desc") :
-      setOrderCommerce(null)
-  }
-  const handleOrderByCuit = ()=>{
-    orderCuit == null ? setOrderCuit("acs")&setOrderCommerce(null):
-    orderCuit == "acs" ? setOrderCuit("desc") :
-    setOrderCuit(null)
-  }
-
-  const handleShowState = ()=>{
-    state == null ? setState(true):
-    state == true ? setState(false) :
-    setState(null)
-  }
-  const handleChange = (event) => {
-      setSearch(event.target.value)
+        setOrderCommerce(null)
+  };
+  const handleOrderByCuit = () => {
+    orderCuit == null ? setOrderCuit("acs") & setOrderCommerce(null) :
+      orderCuit == "acs" ? setOrderCuit("desc") :
+        setOrderCuit(null)
+  };
+  const handleShowState = () => {
+    stateActive == null ? setStateActive(true) :
+      stateActive == true ? setStateActive(false) :
+        setStateActive(null)
+  };
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
   };
 
-  getCommerces({search, orderCommerce, orderCuit,state})
+  getCommerces({ search, orderCommerce, orderCuit, stateActive })
   return (
+    <Box
+      h="max-content"
+    >
+      <SearchBar handleSearch={handleSearch} />
 
-      <Box
-        h="max-content"
-        >
+      <CommercesList
+        handleOrderByCommerce={handleOrderByCommerce}
+        orderCommerce={orderCommerce}
 
-        <SearchBar handleChange={handleChange}/>
-        <CommercesList 
-        handleOrderByCommerce={handleOrderByCommerce}  
         handleOrderByCuit={handleOrderByCuit}
-        handleShowState={handleShowState}/>
+        orderCuit={orderCuit}
 
-      </Box>
+        handleShowState={handleShowState}
+        stateActive={stateActive}
+
+      />
+
+    </Box>
 
   )
 }
