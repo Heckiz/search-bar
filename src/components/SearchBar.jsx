@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import {getCommerces} from '../store/helpers'
+import React from 'react'
 import { Box, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
 import { SearchIcon } from "@chakra-ui/icons"
 

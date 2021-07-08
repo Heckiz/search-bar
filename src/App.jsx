@@ -11,7 +11,7 @@ function App() {
   const [orderCommerce, setOrderCommerce] = useState(null);
   const [orderCuit, setOrderCuit] = useState(null);
   const [stateActive, setStateActive] = useState(null);
-
+  const [nextPage, setNextPage] = useState(null)
   const handleOrderByCommerce = () => {
     orderCommerce == null ? setOrderCommerce("acs") & setOrderCuit(null) :
       orderCommerce == "acs" ? setOrderCommerce("desc") :
@@ -30,8 +30,10 @@ function App() {
   const handleSearch = (event) => {
     setSearch(event.target.value)
   };
-
-  getCommerces({ search, orderCommerce, orderCuit, stateActive })
+  const handleNextPage = (page) =>{
+    setNextPage(page++)
+  };
+  getCommerces({ search, orderCommerce, orderCuit, stateActive, nextPage })
   return (
     <Box
       h="max-content"
@@ -48,6 +50,7 @@ function App() {
         handleShowState={handleShowState}
         stateActive={stateActive}
 
+        handleNextPage={handleNextPage}
       />
 
     </Box>
