@@ -16,7 +16,7 @@ function App() {
       h="max-content"
     >
       <SearchBar handleSearch={handleSearch} />
-      <CommercesList search={search}/>
+      <CommercesList  search={search}/>
 
     </Box>
 

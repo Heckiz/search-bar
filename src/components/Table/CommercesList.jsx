@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import CommerceCard from './CommerceCard';
 import TableHeader from './TableHeader';
+import PaginationNav from './PaginationNav';
 import { getCommerces } from '../../store/helpers';
 import { useSelector } from 'react-redux';
 import { selectAllCommerces } from '../../store/commerceSlice'
@@ -54,30 +55,18 @@ export default function CommercesList({ search }) {
     console.log("DATA RECIVED FROM API:", data)
 
     return (
-        <>
-            {
-                data.data.length != 0 &&
-                <Box>
-                    {
-                        data.page > 1 &&
+        <Box>
+            <Box d="flex" justifyContent="center" >
 
-                        <Button onClick={() => handleBackPage(data.page)}>
-                            back
-                        </Button>
-                    }
+            <PaginationNav 
+            data={data}
+            handleNextPage={handleNextPage}
+            handleBackPage={handleBackPage}
+            />
 
-                    {
-                        data.page != data.pages &&
-                        data.data.length == data.pagePerPage &&
-
-                        <Button onClick={() => handleNextPage(data.page)}>
-                            next
-                        </Button>
-                    }
-
-                </Box>
-            }
+            </Box>
             
+            <Box d="flex" justifyContent="center">
             <Box d="grid" overflowX="scroll"
             >
                 <TableHeader
@@ -101,7 +90,8 @@ export default function CommercesList({ search }) {
 
 
             </Box>
-        </>
+            </Box>
+        </Box>
     )
 }
 
