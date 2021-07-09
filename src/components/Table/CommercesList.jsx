@@ -39,7 +39,7 @@ export default function CommercesList({ search }) {
         setNextPage(page + 1)
     };
 
-    const handleBackPage = (page) => {
+    const handlePrevPage = (page) => {
         setNextPage(page - 1)
     };
 
@@ -58,39 +58,42 @@ export default function CommercesList({ search }) {
         <Box>
             <Box d="flex" justifyContent="center" >
 
-            <PaginationNav 
-            data={data}
-            handleNextPage={handleNextPage}
-            handleBackPage={handleBackPage}
-            />
-
-            </Box>
-            
-            <Box d="flex" justifyContent="center">
-            <Box d="grid" overflowX="scroll"
-            >
-                <TableHeader
-                    handleOrderByCommerce={handleOrderByCommerce}
-                    orderCommerce={orderCommerce}
-
-                    handleOrderByCuit={handleOrderByCuit}
-                    orderCuit={orderCuit}
-
-                    handleShowState={handleShowState}
-                    stateActive={stateActive}
+                <PaginationNav
+                    data={data}
+                    handleNextPage={handleNextPage}
+                    handlePrevPage={handlePrevPage}
                 />
-                {
-                    data.data.map((commerce) => (
-
-                        <Box key={commerce.id} >
-                            <CommerceCard commerce={commerce} />
-                        </Box>
-                    ))
-                }
-
 
             </Box>
+
+            <Box d="flex" justifyContent="center">
+
+                <Box d="grid" overflowX="scroll"
+                >
+                    <TableHeader
+                        handleOrderByCommerce={handleOrderByCommerce}
+                        orderCommerce={orderCommerce}
+
+                        handleOrderByCuit={handleOrderByCuit}
+                        orderCuit={orderCuit}
+
+                        handleShowState={handleShowState}
+                        stateActive={stateActive}
+                    />
+                    {
+                        data.data.map((commerce) => (
+
+                            <Box key={commerce.id} >
+                                <CommerceCard commerce={commerce} />
+                            </Box>
+                        ))
+                    }
+
+
+                </Box>
+
             </Box>
+
         </Box>
     )
 }

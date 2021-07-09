@@ -1,8 +1,8 @@
-import { Box, Flex, FormLabel, Text } from '@chakra-ui/react'
+import { Box, Flex, FormLabel, Text, Button } from '@chakra-ui/react'
 import React from 'react'
 import { blockStyle } from './CommerceCard'
-import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons'
-import { commerceHeader } from '../../store/constants'
+import { TriangleUpIcon, TriangleDownIcon, MinusIcon } from '@chakra-ui/icons'
+import { tableHeader } from '../../store/constants'
 
 export default function TableHeader({
     handleOrderByCommerce,
@@ -18,50 +18,63 @@ export default function TableHeader({
         <Flex>
 
             {
-                commerceHeader.map((element, index) => (
+                tableHeader.map((element, index) => (
 
                     <Box key={index} style={blockStyle}>
 
                         <FormLabel>
 
-
                             {
                                 element == "COMMERCE" ?
-
-                                    <Box  onClick={handleOrderByCommerce}>
+                                    <Box d="grid" pt="2" size="sm"
+                                        onClick={handleOrderByCommerce}>
 
                                         {element}
-                                        {orderCommerce == "acs" && <ChevronUpIcon />}
-                                        {orderCommerce == "desc" && <ChevronDownIcon />}
 
-                                    </Box> :
+                                        <Box d="flex" justifyContent="center">
 
+                                            {
+                                                orderCommerce == "acs" ? <TriangleUpIcon /> :
+                                                    orderCommerce == "desc" ? <TriangleDownIcon /> :
+                                                        <MinusIcon />
+                                            }
 
+                                        </Box>
+                                    </Box>
 
-                                    element == "CUIT" ?
+                                    : element == "CUIT" ?
+                                        <Box d="grid" pt="2" onClick={handleOrderByCuit}>
 
-                                        <Box onClick={handleOrderByCuit}>
                                             {element}
 
-                                            {orderCuit == "acs" && <ChevronUpIcon />}
-                                            {orderCuit == "desc" && <ChevronDownIcon />}
+                                            <Box d="flex" justifyContent="center">
 
-                                        </Box> :
+                                                {
+                                                    orderCuit == "acs" ? <TriangleUpIcon /> :
+                                                        orderCuit == "desc" ? <TriangleDownIcon /> :
+                                                            <MinusIcon />
+                                                }
+                                            </Box>
 
+                                        </Box>
 
-                                        element == "STATE" ?
+                                        : element == "STATE" ?
+                                            <Box d="grid" pt="2" onClick={handleShowState}>
 
-                                            <Box onClick={handleShowState}>
                                                 {element}
 
-                                                {stateActive == true && <ChevronUpIcon />}
-                                                {stateActive == false && <ChevronDownIcon />}
+                                                <Box d="flex" justifyContent="center">
 
-                                            </Box> :
+                                                    {
+                                                        stateActive == true ? <TriangleUpIcon /> :
+                                                            stateActive == false ? <TriangleDownIcon /> :
+                                                                <MinusIcon />
+                                                    }
+                                                </Box>
 
-                                            <Text>
-                                                {element}
-                                            </Text>
+                                            </Box>
+                                            
+                                            : <Text>{element}</Text>
                             }
 
                         </FormLabel>
