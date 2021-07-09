@@ -1,43 +1,74 @@
-import { Box, Flex, Button, FormLabel } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Box, Flex, FormLabel, Text } from '@chakra-ui/react'
+import React from 'react'
 import { blockStyle } from './CommerceCard'
 import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons'
+import { commerceHeader } from '../../store/constants'
 
-export default function TableHeader({ handleOrderByCommerce, handleOrderByCuit, handleShowState, orderCommerce, orderCuit, stateActive }) {
-    const commerceHeader = ["ID", "Commerce", "CUIT", "Concept 1", "Concept 2", "Concept 3", "Concept 4", "Concept 5", "Concept 6", "Balance", "State", "Last Sale"]
+export default function TableHeader({
+    handleOrderByCommerce,
+    handleOrderByCuit,
+    handleShowState,
+    orderCommerce,
+    orderCuit,
+    stateActive
+}) {
+
+
     return (
         <Flex>
 
-            {commerceHeader.map((element) => (
-                <Box style={blockStyle}>
-                    <FormLabel>
+            {
+                commerceHeader.map((element, index) => (
 
-                        {element}
+                    <Box key={index} style={blockStyle}>
 
-                        {element == "Commerce" &&
-                            <Button size="xs" onClick={handleOrderByCommerce}>
-                                {orderCommerce == "acs" && <ChevronUpIcon />}
-                                {orderCommerce == "desc" && <ChevronDownIcon />}
-                            </Button>
-                        }
+                        <FormLabel>
 
-                        {element == "CUIT" &&
-                            <Button size="xs" onClick={handleOrderByCuit}>
-                                {orderCuit == "acs" && <ChevronUpIcon />}
-                                {orderCuit == "desc" && <ChevronDownIcon />}
-                            </Button>
-                        }
 
-                        {element == "State" &&
-                            <Button size="xs" onClick={handleShowState}>
-                                {stateActive == true && <ChevronUpIcon />}
-                                {stateActive == false && <ChevronDownIcon />}
-                            </Button>
-                        }
-                    </FormLabel>
+                            {
+                                element == "COMMERCE" ?
 
-                </Box>
-            ))}
+                                    <Box  onClick={handleOrderByCommerce}>
+
+                                        {element}
+                                        {orderCommerce == "acs" && <ChevronUpIcon />}
+                                        {orderCommerce == "desc" && <ChevronDownIcon />}
+
+                                    </Box> :
+
+
+
+                                    element == "CUIT" ?
+
+                                        <Box onClick={handleOrderByCuit}>
+                                            {element}
+
+                                            {orderCuit == "acs" && <ChevronUpIcon />}
+                                            {orderCuit == "desc" && <ChevronDownIcon />}
+
+                                        </Box> :
+
+
+                                        element == "STATE" ?
+
+                                            <Box onClick={handleShowState}>
+                                                {element}
+
+                                                {stateActive == true && <ChevronUpIcon />}
+                                                {stateActive == false && <ChevronDownIcon />}
+
+                                            </Box> :
+
+                                            <Text>
+                                                {element}
+                                            </Text>
+                            }
+
+                        </FormLabel>
+
+                    </Box>
+                ))
+            }
         </Flex>
     )
 }

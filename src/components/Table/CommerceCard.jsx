@@ -1,61 +1,59 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Text, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 
 export const blockStyle = {
-    d: 'flex',
-    textAlign: 'center',
+    display: 'flex',
     boxShadow: 'lg',
     border: '2px solid black',
-    marginY: '20px',
-    width: '50%',
+    width: '60%',
     overflow: 'hidden',
-    cursor: 'pointer'
-
-
+    cursor: 'pointer',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '20px'
 };
+
 export default function CommerceCard({ commerce }) {
-
+    let values = Object.entries(commerce);
     return (
-        <Box>
-            <Flex  >
-                <Box style={blockStyle}>
-                    {commerce.id}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.commerce}
-                </Box >
-                <Box style={blockStyle}>
-                    {commerce.cuit}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.concept_1}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.concept_2}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.concept_3}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.concept_4}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.concept_5}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.concept_6}
-                </Box>
-                <Box style={blockStyle}>
-                    {commerce.balance}
-                </Box>
-                <Box style={blockStyle} bg={commerce.active ? 'green.200' : 'red.200'}  >
-                    {commerce.active ? <Text>ACTIVO</Text> : <Text>INACTIVO</Text>}
-                </Box>
-                <Box style={blockStyle}>
+        <Flex>
 
-                    {commerce.lastSale}
-                </Box>
-            </Flex>
-        </Box>
+            {
+                values.map((element, index) => (     ///key = element[0] && value element[1]
+
+                    (element[0] == 'active' && element[1] == true) ?
+
+                        <Box key={index} style={blockStyle} bg="green.200">
+
+                            <Text>ACTIVE</Text>
+
+                        </Box> :
+
+                        (element[0] == 'active' && element[1] == false) ?
+
+                            <Box key={index} style={blockStyle} bg="red.200">
+
+                                <Text>INACTIVE</Text>
+
+                            </Box> :
+
+                            (element[0] == 'id' || element[0] == 'commerce' || element[0] == 'cuit' || element[0] == 'lastSale') ?
+
+                                <Box key={index} style={blockStyle} >
+
+                                    <Tooltip label={element[1]}>
+                                        <Text as="cite" color="black">{element[1]}</Text>
+                                    </Tooltip>
+                                </Box> :
+
+                                <Box key={index} style={blockStyle}>
+
+                                    <Text>${element[1]}</Text>
+
+                                </Box>
+
+                ))
+            }
+        </Flex>
     )
 }
