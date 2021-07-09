@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { API_BASE_URL } from './constants';
+import { API_BASE_URL, initialState } from './constants';
 import axios from 'axios';
 
 export const getDataCommerces = createAsyncThunk('commerces/getData', async ({ search, orderCommerce, orderCuit, stateActive, nextPage }, { getState }) => {
@@ -27,13 +27,7 @@ export const getDataCommerces = createAsyncThunk('commerces/getData', async ({ s
 
 const commercesSlice = createSlice({
   name: 'commerces',
-  initialState: {
-    data: [],
-    page: 1,
-    pages: 10,
-    pagePerPage: 10,
-    total: 100,
-  },
+  initialState: initialState,
   extraReducers: {
 
     [getDataCommerces.fulfilled]: (state, action) => {
